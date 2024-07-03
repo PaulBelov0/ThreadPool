@@ -12,7 +12,7 @@ endif()
 project ("ThreadPool")
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (ThreadPool "ThreadPool.cpp" "ThreadPool.h")
+add_executable (ThreadPool "main.cpp" "main.h" "ThreadPool/ThreadPool.h" "ThreadPool/ThreadPool.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ThreadPool PROPERTY CXX_STANDARD 20)
