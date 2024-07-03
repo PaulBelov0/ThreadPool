@@ -1,29 +1,23 @@
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool(size_t num_threads = std::thread::hardware_concurrency())
-{
+ThreadPool::ThreadPool(size_t& num_threads) {
 	stop_ = false;
 
-	for (std::size_t i = 0; i < num_threads; i++)
-	{
-		threads_.emplace_back([this]
-			{
-				while (true)
-				{
-					std::function<void()> task;
-					{
+    for (std::size_t i = 0; i < num_threads; i++) {
+        threads_.emplace_back([this] {
+                while (true) {
+                    std::function<void()> task;
+                    {
 						std::unique_lock<std::mutex> lock(queueMutex_);
 
-						cv_.wait(lock, [this]
-							{
+                        cv_.wait(lock, [this] {
 								return !tasks_.empty() || stop_;
 							});
-						if (stop_ && tasks_.empty())
-						{
+                        if (stop_ && tasks_.empty()) {
 							return;
 						}
 
-						task = move(tasks_.front());
+                        task = std::move(tasks_.front());
 						tasks_.pop();
 					}
 					task();
@@ -32,17 +26,15 @@ ThreadPool::ThreadPool(size_t num_threads = std::thread::hardware_concurrency())
 	}
 }
 
-void ThreadPool::enqueue(std::function<void()> task)
-{
+void ThreadPool::enqueue(std::function<void()>& task) {
 	{
 		std::unique_lock<std::mutex> lock(queueMutex_);
-		tasks_.emplace(move(task));
+        tasks_.emplace(std::move(task));
 	}
 	cv_.notify_one();
 }
 
-ThreadPool::~ThreadPool()
-{
+ThreadPool::~ThreadPool() {
 	{
 		std::unique_lock<std::mutex> lock(queueMutex_);
 		stop_ = true;

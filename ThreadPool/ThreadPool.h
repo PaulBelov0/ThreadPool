@@ -1,22 +1,20 @@
 #ifndef THREADPOOL_H
 #define THREADPOOL_H
 
-#include <condition_variable> 
-#include <functional> 
-#include <iostream> 
+#include <condition_variable>
+#include <functional>
 #include <mutex> 
 #include <queue> 
 #include <thread> 
 
-class ThreadPool
-{
+class ThreadPool{
 public:
 
-	ThreadPool(size_t num_threads = std::thread::hardware_concurrency());
+    explicit ThreadPool(size_t& num_threads);
 
 	~ThreadPool();
 
-	void enqueue(std::function<void()> task);
+    void enqueue(std::function<void()>& task);
 
 private:
 	std::vector<std::thread> threads_;
