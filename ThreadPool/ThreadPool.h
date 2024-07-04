@@ -21,7 +21,7 @@ private:
 
 	std::queue<std::function<void()>> tasks_;
 
-	std::mutex queueMutex_;
+	std::mutex queue_mutex_;
 	std::condition_variable cv_;
 
 	bool stop_;

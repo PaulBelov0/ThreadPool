@@ -23,10 +23,10 @@ int Menu::selectingActions()
     {
         if (thread_count_ >= 2)
         {
-            if (std::thread::hardware_concurrency() > 2 && std::thread::hardware_concurrency() >= ++thread_count_)
+            if (std::thread::hardware_concurrency() > 2 && std::thread::hardware_concurrency() >= 1 + thread_count_)
             {
                 pool_->~ThreadPool();
-                pool_ = new ThreadPool(thread_count_);
+                pool_ = new ThreadPool(++thread_count_);
                 selectingActions();
             }
             else
