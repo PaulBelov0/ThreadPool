@@ -11,7 +11,7 @@ endif()
 
 project ("ThreadPool")
 
-include_directories ("./Menu/" "./ThreadPool/")
+include_directories ("./Menu/" "./ThreadPool/" "./Task/")
 
 # Добавьте источник в исполняемый файл этого проекта.
 add_executable (ThreadPool "main.cpp" "ThreadPool/threadpool.h" "ThreadPool/threadpool.cpp" "Menu/menu.h" "Menu/menu.cpp" "Task/task.h" "Task/task.cpp")
