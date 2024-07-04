@@ -11,8 +11,10 @@ endif()
 
 project ("ThreadPool")
 
+include_directories ("./Menu/" "./ThreadPool/")
+
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (ThreadPool "main.cpp" "main.h" "ThreadPool/ThreadPool.h" "ThreadPool/ThreadPool.cpp")
+add_executable (ThreadPool "main.cpp" "ThreadPool/threadpool.h" "ThreadPool/threadpool.cpp" "Menu/menu.h" "Menu/menu.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ThreadPool PROPERTY CXX_STANDARD 20)

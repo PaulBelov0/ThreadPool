@@ -1,0 +1,3 @@
+D:/Projects_C++/ThreadPool/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/ThreadPool.dir
+D:/Projects_C++/ThreadPool/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+D:/Projects_C++/ThreadPool/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
