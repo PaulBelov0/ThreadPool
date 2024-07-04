@@ -19,10 +19,6 @@ int main()
 
     switch (menu.selectingActions())
     {
-    case 1:
-        pair = menu.getNumberPair();
-        std::cout << pair.first << "\t" << pair.second << std::endl;
-        break;
     case 3:
         break;
     }

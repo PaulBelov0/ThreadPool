@@ -7,21 +7,25 @@
 #include <exception>
 #include <memory>
 #include <cstdint>
+#include <task.h>
+#include <chrono>
 
 class Menu
 {
 public:
-    Menu(size_t threadCount);
+    Menu(size_t thread_count);
 
     ~Menu();
 
     int selectingActions();
 
-    std::pair<uint64_t, uint64_t> getNumberPair();
+    void getNumberPair();
 
-    void output();
+    void wrongInputError();
 
 private:
+    Task task;
+
     size_t thread_count_;
 
     std::string user_message_;
@@ -29,6 +33,8 @@ private:
     ThreadPool* pool_;
 
     std::pair<uint64_t, uint64_t> user_pair_;
+
+    std::list<uint64_t> output_list_;
 };
 
 #endif // MENU_H

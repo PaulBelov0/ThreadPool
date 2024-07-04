@@ -3,6 +3,7 @@
 
 #include <condition_variable>
 #include <functional>
+#include <cstdint>
 #include <mutex> 
 #include <queue> 
 #include <thread> 
@@ -14,7 +15,7 @@ public:
 
 	~ThreadPool();
 
-    void enqueue(std::function<void()>& task);
+    bool enqueue(std::function<void()> task);
 
 private:
 	std::vector<std::thread> threads_;

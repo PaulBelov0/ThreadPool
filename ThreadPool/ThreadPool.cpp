@@ -26,12 +26,14 @@ ThreadPool::ThreadPool(size_t& num_threads) {
 	}
 }
 
-void ThreadPool::enqueue(std::function<void()>& task) {
+bool ThreadPool::enqueue(std::function<void()> task) {
 	{
 		std::unique_lock<std::mutex> lock(queue_mutex_);
         tasks_.emplace(std::move(task));
 	}
 	cv_.notify_one();
+
+	return true;
 }
 
 ThreadPool::~ThreadPool() {
