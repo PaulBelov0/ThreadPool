@@ -95,7 +95,7 @@ void Menu::getNumberPair()
     std::cin >> user_message_;
     try
     {
-        user_pair_.first = std::stoi(user_message_);
+        user_pair_.first = std::stoul(user_message_);
     }
     catch (const std::invalid_argument& e)
     {
@@ -107,7 +107,7 @@ void Menu::getNumberPair()
 
     try
     {
-        user_pair_.second = std::stoi(user_message_);
+        user_pair_.second = std::stoul(user_message_);
     }
     catch (const std::invalid_argument& e)
     {
