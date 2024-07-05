@@ -10,7 +10,7 @@ std::list<uint64_t>& Task::calculate(uint64_t& value)
 {
     bool flag;
 
-    for (int i = 2; i <= value/2; i++)
+    for (int i = 2; i <= (value/2)+1; i++)
     {
         flag = true;
 
