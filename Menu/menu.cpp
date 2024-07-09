@@ -3,11 +3,11 @@
 Menu::Menu(size_t thread_count)
 {
     thread_count_ = thread_count;
-    pool_ = new ThreadPool(thread_count_);
+    pool_.reset(new ThreadPool(thread_count_));
 }
 
 
-Menu::~Menu() { delete pool_; }
+Menu::~Menu() {}
 
 
 int Menu::selectingActions()
@@ -27,31 +27,24 @@ int Menu::selectingActions()
     {
         getNumberPair();
 
-        output_list_ = task.calculate(user_pair_.first);
-
         std::function<void()> func([this]() {
 
             system("cls");
             std::cout << "Calculating result: " << std::endl;
 
+            output_list_ = task.calculate(user_pair_.first);
             output_list_.sort();
 
             for (auto& element : output_list_)
             {
                 std::cout << element << "\t";
             }
-            std::cout << "\n"; 
+            std::cout << "\n";
             });
 
-        do
-        {
-            pool_result_ =  pool_->enqueue(func);
-        }
-        while (pool_result_ != true);
-        
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        pool_result_ = pool_->enqueue(func);
 
-        selectingActions();
+        std::this_thread::sleep_for(std::chrono::seconds(5));
 
         return 1;
     }
@@ -61,20 +54,22 @@ int Menu::selectingActions()
         {
             if (std::thread::hardware_concurrency() > 2 && std::thread::hardware_concurrency() >= 1 + thread_count_)
             {
-                pool_->~ThreadPool();
-                pool_ = new ThreadPool(++thread_count_);
-                selectingActions();
+                pool_.reset(new ThreadPool(++thread_count_));
+
+                return 2;
             }
             else
             {
                 std::cout << "Error! All threads used!" << std::endl;
-                selectingActions();
+
+                return 2;
             }
         }
         else
         {
             std::cout << "Error! All threads used!" << std::endl;
-            selectingActions();
+
+            return 2;
         }
     }
     else if (user_message_ == "3")
@@ -84,6 +79,7 @@ int Menu::selectingActions()
     else
     {
         wrongInputError();
+        return 1;
     }
 }
 

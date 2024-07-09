@@ -30,7 +30,7 @@ private:
 
     std::string user_message_;
 
-    ThreadPool* pool_;
+    std::unique_ptr<ThreadPool> pool_;
 
     std::pair<uint64_t, uint64_t> user_pair_;
 

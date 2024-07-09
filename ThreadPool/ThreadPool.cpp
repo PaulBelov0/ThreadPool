@@ -13,6 +13,7 @@ ThreadPool::ThreadPool(size_t& num_threads) {
                         cv_.wait(lock, [this] {
 								return !tasks_.empty() || stop_;
 							});
+
                         if (stop_ && tasks_.empty()) {
 							return;
 						}

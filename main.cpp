@@ -17,10 +17,7 @@ int main()
 
     std::pair <uint64_t, uint64_t> pair;
 
-    switch (menu.selectingActions())
-    {
-    case 3:
-        break;
-    }
+    while (menu.selectingActions() != 3){}
+
     return 0;
 }
