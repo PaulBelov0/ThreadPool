@@ -1,4 +1,4 @@
-# ThreadPool only std::realization.
+# ThreadPool only standart libraries realization.
 
 # Создан ThreadPool который при вводе пользователем "restart" увеличивает количество исользуемых потоков, если это возможно.
 # ThreadPool получает задачу по поиску всех простых делителей первого введенного пользователем числа, 
